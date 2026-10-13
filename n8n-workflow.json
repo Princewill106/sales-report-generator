@@ -1,0 +1,186 @@
+{
+  "name": "Automated Sales Report Generator (AI Automation Projects #12)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * 1"
+            }
+          ]
+        }
+      },
+      "id": "4e5e4fa9-d36b-5b60-86f4-ed6bc72d55be",
+      "name": "Schedule (Mondays 8am)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "options": {}
+      },
+      "id": "d81ba10c-a6e5-50e6-935b-5dd302ba15ed",
+      "name": "Read sales sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "8e004de5-7b43-5dfa-b232-3a05db02bc91",
+      "name": "Test with sample data",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Sample data from this repo. Click 'Test workflow' to run the whole flow on it.\nconst sample = [\n {\n  \"date\": \"2026-09-22\",\n  \"order_id\": \"O1\",\n  \"branch\": \"Ikeja\",\n  \"product\": \"Jollof Rice\",\n  \"qty\": \"3\",\n  \"unit_price\": \"3500\"\n },\n {\n  \"date\": \"2026-09-22\",\n  \"order_id\": \"O2\",\n  \"branch\": \"Lekki\",\n  \"product\": \"Fried Rice\",\n  \"qty\": \"2\",\n  \"unit_price\": \"3500\"\n },\n {\n  \"date\": \"2026-09-23\",\n  \"order_id\": \"O3\",\n  \"branch\": \"Ikeja\",\n  \"product\": \"Chicken\",\n  \"qty\": \"4\",\n  \"unit_price\": \"2500\"\n },\n {\n  \"date\": \"2026-09-24\",\n  \"order_id\": \"O4\",\n  \"branch\": \"Yaba\",\n  \"product\": \"Jollof Rice\",\n  \"qty\": \"2\",\n  \"unit_price\": \"3500\"\n },\n {\n  \"date\": \"2026-09-25\",\n  \"order_id\": \"O5\",\n  \"branch\": \"Lekki\",\n  \"product\": \"Smoothie\",\n  \"qty\": \"3\",\n  \"unit_price\": \"2000\"\n },\n {\n  \"date\": \"2026-09-26\",\n  \"order_id\": \"O6\",\n  \"branch\": \"Ikeja\",\n  \"product\": \"Fried Rice\",\n  \"qty\": \"2\",\n  \"unit_price\": \"3500\"\n },\n {\n  \"date\": \"2026-09-27\",\n  \"order_id\": \"O7\",\n  \"branch\": \"Lekki\",\n  \"product\": \"Jollof Rice\",\n  \"qty\": \"5\",\n  \"unit_price\": \"3500\"\n },\n {\n  \"date\": \"2026-09-28\",\n  \"order_id\": \"O8\",\n  \"branch\": \"Yaba\",\n  \"product\": \"Chicken\",\n  \"qty\": \"2\",\n  \"unit_price\": \"2500\"\n },\n {\n  \"date\": \"2026-09-29\",\n  \"order_id\": \"O9\",\n  \"branch\": \"Ikeja\",\n  \"product\": \"Jollof Rice\",\n  \"qty\": \"6\",\n  \"unit_price\": \"3500\"\n },\n {\n  \"date\": \"2026-09-29\",\n  \"order_id\": \"O10\",\n  \"branch\": \"Lekki\",\n  \"product\": \"Smoothie\",\n  \"qty\": \"8\",\n  \"unit_price\": \"2000\"\n },\n {\n  \"date\": \"2026-09-30\",\n  \"order_id\": \"O11\",\n  \"branch\": \"Lekki\",\n  \"product\": \"Fried Rice\",\n  \"qty\": \"4\",\n  \"unit_price\": \"3500\"\n },\n {\n  \"date\": \"2026-10-01\",\n  \"order_id\": \"O12\",\n  \"branch\": \"Yaba\",\n  \"product\": \"Chicken\",\n  \"qty\": \"1\",\n  \"unit_price\": \"2500\"\n },\n {\n  \"date\": \"2026-10-02\",\n  \"order_id\": \"O13\",\n  \"branch\": \"Lekki\",\n  \"product\": \"Smoothie\",\n  \"qty\": \"6\",\n  \"unit_price\": \"2000\"\n },\n {\n  \"date\": \"2026-10-02\",\n  \"order_id\": \"O14\",\n  \"branch\": \"Ikeja\",\n  \"product\": \"Jollof Rice\",\n  \"qty\": \"4\",\n  \"unit_price\": \"3500\"\n },\n {\n  \"date\": \"2026-10-03\",\n  \"order_id\": \"O15\",\n  \"branch\": \"Lekki\",\n  \"product\": \"Chicken\",\n  \"qty\": \"5\",\n  \"unit_price\": \"2500\"\n },\n {\n  \"date\": \"2026-10-04\",\n  \"order_id\": \"O16\",\n  \"branch\": \"Yaba\",\n  \"product\": \"Jollof Rice\",\n  \"qty\": \"2\",\n  \"unit_price\": \"3500\"\n },\n {\n  \"date\": \"2026-10-05\",\n  \"order_id\": \"O17\",\n  \"branch\": \"Lekki\",\n  \"product\": \"Smoothie\",\n  \"qty\": \"4\",\n  \"unit_price\": \"2000\"\n }\n];\nreturn sample.map(json => ({ json }));"
+      },
+      "id": "7fa0f3c9-6f60-5875-b4dd-b75a02beb01d",
+      "name": "Sample data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Automated Sales Report Generator: core logic (ported from main.py)\n\n// ---- input normaliser (works for Webhook, Form, WhatsApp, Gmail, Sheets and sample data)\nconst input = $input.all().flatMap(i => {\n  const j = i.json || {};\n  if (j.messages && Array.isArray(j.messages)) {           // WhatsApp Trigger\n    return j.messages.filter(m => m.text).map(m => ({ from: '+' + m.from, text: m.text.body }));\n  }\n  if (j.Subject !== undefined || j.From !== undefined) {     // Gmail Trigger (simple)\n    return [{ from: (j.From || '').replace(/.*<|>.*/g, ''), subject: j.Subject || '', body: j.snippet || j.text || '' }];\n  }\n  const b = (j.body !== undefined && j.headers !== undefined) ? j.body : j;   // Webhook wraps payload in body\n  if (Array.isArray(b)) return b;\n  if (b && Array.isArray(b.items)) return b.items;\n  return [b];\n});\n\nconst rows = input.map(r => ({ ...r, d: new Date(r.date + 'T00:00:00'), rev: Number(r.qty) * Number(r.unit_price) }));\nconst end = new Date(Math.max(...rows.map(r => r.d))), start = new Date(end - 6 * 864e5), prevStart = new Date(start - 7 * 864e5);\nconst cur = rows.filter(r => r.d >= start && r.d <= end), prev = rows.filter(r => r.d >= prevStart && r.d < start);\nconst k = rs => { const rev = rs.reduce((s, r) => s + r.rev, 0), orders = new Set(rs.map(r => r.order_id)).size; return { rev, orders, aov: orders ? rev / orders : 0 }; };\nconst by = (rs, key) => rs.reduce((o, r) => (o[r[key]] = (o[r[key]] || 0) + r.rev, o), {});\nconst pct = (a, b) => b ? ((a - b) / b * 100).toFixed(1) + '%' : 'n/a';\nconst k1 = k(cur), k0 = k(prev), p1 = by(cur, 'product'), p0 = by(prev, 'product');\nconst movers = [...new Set([...Object.keys(p1), ...Object.keys(p0)])].map(p => [p, (p1[p] || 0) - (p0[p] || 0)]).sort((a, b) => b[1] - a[1]);\nconst branches = Object.entries(by(cur, 'branch')).sort((a, b) => b[1] - a[1]);\nconst f = n => 'NGN ' + Math.round(n).toLocaleString();\nconst report = [`Week ${start.toISOString().slice(0, 10)} to ${end.toISOString().slice(0, 10)}`,\n  `Revenue ${f(k1.rev)} (${pct(k1.rev, k0.rev)} vs last week)`, `Orders ${k1.orders} (${pct(k1.orders, k0.orders)})`,\n  `Average order ${f(k1.aov)} (${pct(k1.aov, k0.aov)})`, `Biggest gain: ${movers[0][0]} (+${f(movers[0][1])})`,\n  `Biggest drop: ${movers[movers.length - 1][0]} (${f(movers[movers.length - 1][1])})`, `Top branch: ${branches[0][0]} with ${f(branches[0][1])}`].join('\\n');\nreturn [{ json: { revenue: k1.rev, change: pct(k1.rev, k0.rev), report } }];\n"
+      },
+      "id": "9532bb89-c67e-54dd-870a-55a55f637706",
+      "name": "Logic",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "md@yourbusiness.com",
+        "subject": "=Weekly sales: NGN {{ $json.revenue }} ({{ $json.change }})",
+        "emailType": "text",
+        "message": "={{ $json.report }}",
+        "options": {}
+      },
+      "id": "3488cf12-b741-50d1-b855-2c99b99e0caf",
+      "name": "Email the MD",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        720,
+        120
+      ],
+      "webhookId": "3488cf12-b741-50d1-b855-2c99b99e0caf"
+    },
+    {
+      "parameters": {
+        "content": "## Automated Sales Report Generator\nEvery Monday at 8am: last week's numbers, what changed, and why, written for the MD.\n\nEvery Monday at 8am it reads transactions (date, order_id, branch, product, qty, unit_price), compares the latest 7 days with the 7 before, finds the biggest movers and top branch, and emails the MD a plain-English report.\n\n**Try it:** click *Test workflow* to run on the sample data. Then connect your credentials on the output nodes and activate.\n\nCode and docs: github.com/Princewill106/sales-report-generator",
+        "height": 340,
+        "width": 420,
+        "color": 5
+      },
+      "id": "06daca62-80fc-54cb-9636-85e6b3d392e4",
+      "name": "About this workflow",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -460
+      ]
+    }
+  ],
+  "connections": {
+    "Schedule (Mondays 8am)": {
+      "main": [
+        [
+          {
+            "node": "Read sales sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Test with sample data": {
+      "main": [
+        [
+          {
+            "node": "Sample data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read sales sheet": {
+      "main": [
+        [
+          {
+            "node": "Logic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sample data": {
+      "main": [
+        [
+          {
+            "node": "Logic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Logic": {
+      "main": [
+        [
+          {
+            "node": "Email the MD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

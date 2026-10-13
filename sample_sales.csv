@@ -1,0 +1,18 @@
+date,order_id,branch,product,qty,unit_price
+2026-09-22,O1,Ikeja,Jollof Rice,3,3500
+2026-09-22,O2,Lekki,Fried Rice,2,3500
+2026-09-23,O3,Ikeja,Chicken,4,2500
+2026-09-24,O4,Yaba,Jollof Rice,2,3500
+2026-09-25,O5,Lekki,Smoothie,3,2000
+2026-09-26,O6,Ikeja,Fried Rice,2,3500
+2026-09-27,O7,Lekki,Jollof Rice,5,3500
+2026-09-28,O8,Yaba,Chicken,2,2500
+2026-09-29,O9,Ikeja,Jollof Rice,6,3500
+2026-09-29,O10,Lekki,Smoothie,8,2000
+2026-09-30,O11,Lekki,Fried Rice,4,3500
+2026-10-01,O12,Yaba,Chicken,1,2500
+2026-10-02,O13,Lekki,Smoothie,6,2000
+2026-10-02,O14,Ikeja,Jollof Rice,4,3500
+2026-10-03,O15,Lekki,Chicken,5,2500
+2026-10-04,O16,Yaba,Jollof Rice,2,3500
+2026-10-05,O17,Lekki,Smoothie,4,2000
